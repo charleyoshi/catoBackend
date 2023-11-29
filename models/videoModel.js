@@ -18,7 +18,8 @@ const videoSchema = new Schema(
 
         avatar: String,
         locale: String
-    })
+    },
+    { timestamps: true })
 
 
 module.exports = mongoose.model('Video', videoSchema)

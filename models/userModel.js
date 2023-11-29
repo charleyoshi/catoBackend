@@ -8,6 +8,7 @@ const userSchema = new Schema(
         firstName: { type: String, required: true, default: "" },
         lastName: { type: String, required: true, default: "" },
         imageURL: { type: String, required: true, default: "" }
-    })
+    },
+    { timestamps: true })
 
 module.exports = mongoose.model('User', userSchema)
