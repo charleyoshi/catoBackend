@@ -25,6 +25,19 @@ app.use('/api/comment/:cid/votes', voteRoutes)
 app.use('/api/user', userRoutes)
 
 app.use('/api/report', reportRoutes)
+app.use('/healthCheck', (req, res) => {
+    const healthcheck = {
+        uptime: process.uptime(),
+        message: 'OK',
+        timestamp: Date.now()
+    };
+    try {
+        res.send(healthcheck);
+    } catch (error) {
+        healthcheck.message = error;
+        res.status(503).send();
+    }
+})
 
 
 // connect to db
@@ -33,6 +46,7 @@ mongoose.connect(process.env.MONGO_URI)
         // listen for requests
         app.listen(process.env.PORT, () => {
             console.log(`connected to db & listening on port ${process.env.PORT}!!!!`)
+
         })
     })
     .catch((error) => {
