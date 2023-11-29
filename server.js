@@ -7,6 +7,7 @@ const commentRoutes = require('./routes/comments')
 const voteRoutes = require('./routes/votes')
 const userRoutes = require('./routes/user')
 const reportRoutes = require('./routes/report')
+const { default: axios } = require('axios')
 
 // express app
 const app = express()
@@ -39,6 +40,19 @@ app.use('/healthCheck', (req, res) => {
     }
 })
 
+const keepServerAlive = async () => {
+    try {
+        const response = await axios.get('https://cato-backend.onrender.com');
+        console.log('Server pinged successfully.');
+    } catch (error) {
+        console.error('Error pinging server:', error);
+    }
+}
+
+const INTERVAL_TIME = 14 * 60 * 1000; // 14 minutes in milliseconds
+
+keepServerAlive()
+setInterval(keepServerAlive, INTERVAL_TIME)
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
