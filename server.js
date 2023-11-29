@@ -42,14 +42,14 @@ app.use('/healthCheck', (req, res) => {
 
 const keepServerAlive = async () => {
     try {
-        const response = await axios.get('https://cato-backend.onrender.com');
+        const response = await axios.get('https://cato-backend.onrender.com/');
         console.log('Server pinged successfully.');
     } catch (error) {
         console.error('Error pinging server:', error);
     }
 }
 
-const INTERVAL_TIME = 14 * 60 * 1000; // 14 minutes in milliseconds
+const INTERVAL_TIME = 0.5 * 60 * 1000; // 14 minutes in milliseconds
 
 keepServerAlive()
 setInterval(keepServerAlive, INTERVAL_TIME)
