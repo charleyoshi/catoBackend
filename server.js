@@ -32,7 +32,7 @@ app.use('/healthCheck', (req, res) => {
         timestamp: Date.now()
     };
     try {
-        res.send(healthcheck);
+        res.status(200).send(healthcheck);
     } catch (error) {
         healthcheck.message = error;
         res.status(503).send();
