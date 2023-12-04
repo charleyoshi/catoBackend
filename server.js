@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const express = require('express')
+const cors = require('cors')
 const mongoose = require('mongoose')
 const videoRoutes = require('./routes/videos')
 const commentRoutes = require('./routes/comments')
@@ -14,6 +15,7 @@ const app = express()
 
 // middleware: fire every time receive a request. Fire BEFORE the route to the root path ('/')
 app.use(express.json())
+app.use(cors())
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
